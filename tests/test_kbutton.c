@@ -149,6 +149,35 @@ static void test_click_then_long_press(void)
     expect_event(6, KBUTTON_EVENT_LONG_RELEASE, 0);
 }
 
+static void test_release_candidate_freezes_long_press_deadline(void)
+{
+    kbutton_config_t config = {40, 300, 1000, 0};
+    kbutton_t button = make_button(config);
+
+    kbutton_update(&button, false, 0);
+
+    kbutton_update(&button, true, 10);
+    kbutton_update(&button, true, 50);
+    expect_event(0, KBUTTON_EVENT_PRESS, 0);
+
+    /*
+     * Start releasing just before the long-press threshold. Once the raw
+     * level changes, hold timing must stop even though the release still has
+     * to pass debounce.
+     */
+    kbutton_update(&button, false, 1040);
+    kbutton_update(&button, false, 1050);
+    assert(event_count == 1);
+
+    kbutton_update(&button, false, 1080);
+    assert(event_count == 2);
+    expect_event(1, KBUTTON_EVENT_RELEASE, 0);
+
+    kbutton_update(&button, false, 1380);
+    assert(event_count == 3);
+    expect_event(2, KBUTTON_EVENT_CLICK, 1);
+}
+
 static void test_press_candidate_freezes_click_deadline(void)
 {
     kbutton_config_t config = {30, 100, 500, 0};
@@ -215,6 +244,7 @@ int main(void)
     test_multi_click();
     test_long_press_repeat_and_release();
     test_click_then_long_press();
+    test_release_candidate_freezes_long_press_deadline();
     test_press_candidate_freezes_click_deadline();
     test_timer_wraparound();
     test_reset_preserves_configuration_and_callback();
