@@ -149,9 +149,19 @@ void kbutton_update(
         button->raw_changed_at = now;
     }
 
-    if (button->raw_pressed != button->pressed &&
-        elapsed(now, button->raw_changed_at) >= button->config.debounce_ms)
+    if (button->raw_pressed != button->pressed)
     {
+        if (elapsed(now, button->raw_changed_at) < button->config.debounce_ms)
+        {
+            /*
+             * Freeze gesture timers while an opposite level is being
+             * debounced. A release candidate near the long-press threshold
+             * must not turn a short press into a long press, and a press
+             * candidate near the click deadline must not split a multi-click.
+             */
+            return;
+        }
+
         stable_transition(button, button->raw_pressed, now);
     }
 
