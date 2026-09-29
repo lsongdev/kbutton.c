@@ -2,40 +2,31 @@
 # Syntax Coloring Map for KButton
 #######################################
 
-#######################################
-# Datatypes (KEYWORD1)
-#######################################
+KButton	KEYWORD1
+kbutton_t	KEYWORD1
+kbutton_config_t	KEYWORD1
+kbutton_event_t	KEYWORD1
 
-callbackFunction	KEYWORD1
-parameterizedCallbackFunction	KEYWORD1
+kbutton_init	KEYWORD2
+kbutton_reset	KEYWORD2
+kbutton_configure	KEYWORD2
+kbutton_set_callback	KEYWORD2
+kbutton_update	KEYWORD2
+kbutton_is_pressed	KEYWORD2
+kbutton_is_long_pressed	KEYWORD2
 
-#######################################
-# Methods and Functions (KEYWORD2)
-#######################################
-
-setClickTicks	KEYWORD2
-setPressTicks	KEYWORD2
-setDebounceTicks	KEYWORD2
-attachClick	KEYWORD2
-attachDoubleClick	KEYWORD2
-attachMultiClick	KEYWORD2
-attachLongPressStart	KEYWORD2
-attachLongPressStop	KEYWORD2
-attachDuringLongPress	KEYWORD2
+begin	KEYWORD2
 tick	KEYWORD2
-reset	KEYWORD2
-getNumberClicks	KEYWORD2
-isIdle	KEYWORD2
-isLongPressed	KEYWORD2
+onPress	KEYWORD2
+onRelease	KEYWORD2
+onClicks	KEYWORD2
+onLongPress	KEYWORD2
+onLongRepeat	KEYWORD2
+onLongRelease	KEYWORD2
 
-#######################################
-# Instances (KEYWORD2)
-#######################################
-
-KButton	KEYWORD2
-
-#######################################
-# Constants (LITERAL1)
-#######################################
-
-
+KBUTTON_EVENT_PRESS	LITERAL1
+KBUTTON_EVENT_RELEASE	LITERAL1
+KBUTTON_EVENT_CLICK	LITERAL1
+KBUTTON_EVENT_LONG_PRESS	LITERAL1
+KBUTTON_EVENT_LONG_REPEAT	LITERAL1
+KBUTTON_EVENT_LONG_RELEASE	LITERAL1
