@@ -184,10 +184,10 @@ static void test_timer_wraparound(void)
 
     kbutton_update(&button, false, UINT32_MAX - 20u);
     kbutton_update(&button, true, UINT32_MAX - 5u);
-    kbutton_update(&button, true, 14u);
+    kbutton_update(&button, true, 13u);
     assert(event_count == 1);
 
-    kbutton_update(&button, true, 15u);
+    kbutton_update(&button, true, 14u);
     assert(event_count == 2);
     expect_event(1, KBUTTON_EVENT_LONG_PRESS, 0);
 }
